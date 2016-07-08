@@ -1,5 +1,20 @@
-FROM frolvlad/alpine-oraclejdk8:slim
-VOLUME /tmp
-ADD spring-boot-docker-0.1.0.jar spring-boot-docker.jar
-RUN sh -c 'touch /spring-boot-docker.jar'
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/spring-boot-docker.jar"]
+FROM anapsix/docker-oracle-java8
+
+# Install maven
+RUN apt-get update -y
+RUN apt-get install -y maven
+
+# Creating working directory
+WORKDIR /app
+
+# Add src to working directory
+ADD pom.xml /app/pom.xml
+ADD src /app/src
+
+# Build JAR
+RUN mvn package -DskipTests=true
+
+RUN ls /app/target
+
+# Start app
+ENTRYPOINT ["java","-jar","/app/target/docker-spring-boot-0.1.0.jar"]
