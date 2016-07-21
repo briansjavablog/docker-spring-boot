@@ -14,7 +14,5 @@ ADD src /app/src
 # Build JAR
 RUN mvn package -DskipTests=true
 
-RUN ls /app/target
-
 # Start app
-ENTRYPOINT ["java","-jar","/app/target/docker-smaple-1-0.1.0.jar"]
+ENTRYPOINT ["java","-jar","/app/target/docker-sample-1-0.1.0.jar"]

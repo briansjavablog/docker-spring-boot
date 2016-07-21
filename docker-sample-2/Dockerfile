@@ -4,10 +4,7 @@ FROM anapsix/docker-oracle-java8
 WORKDIR /app
 
 # Add src to working directory
-ADD target/docker-smaple-2-0.1.0.jar /app/docker-smaple-2-0.1.0.jar
-
-# Build JAR
-#RUN mvn package -DskipTests=true
+ADD target/docker-smaple-2-0.1.0.jar /app/docker-sample-2-0.1.0.jar
 
 # Start app
-ENTRYPOINT ["java","-jar","/app/docker-smaple-2-0.1.0.jar"]
+ENTRYPOINT ["java","-jar","/app/docker-sample-2-0.1.0.jar"]
